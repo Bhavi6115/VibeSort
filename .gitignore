@@ -1,0 +1,8 @@
+backend/__pycache__/
+backend/.env
+backend/users.db
+backend/*.pkl
+frontend/node_modules/
+frontend/dist/
+*.log
+.DS_Store

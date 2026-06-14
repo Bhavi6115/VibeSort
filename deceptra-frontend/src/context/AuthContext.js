@@ -11,7 +11,7 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     if (token) {
-      // Optionally verify token with backend
+      // optionally verify token with backend
       setLoading(false);
     } else {
       setLoading(false);
@@ -32,13 +32,9 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem('username');
   };
 
-  const value = {
-    user,
-    token,
-    login,
-    logout,
-    loading
-  };
-
-  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+  return (
+    <AuthContext.Provider value={{ user, token, login, logout, loading }}>
+      {children}
+    </AuthContext.Provider>
+  );
 };

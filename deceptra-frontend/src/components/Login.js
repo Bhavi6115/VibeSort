@@ -32,20 +32,18 @@ const Login = ({ onSwitchToRegister }) => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-900">
-      <div className="bg-black/40 backdrop-blur-xl p-8 rounded-2xl border border-white/20 w-full max-w-md">
-        <h2 className="text-3xl font-bold text-center mb-6 bg-gradient-to-r from-cyan-300 to-blue-400 bg-clip-text text-transparent">
-          ScamShield AI
-        </h2>
-        <h3 className="text-xl text-center mb-6">Login</h3>
-        {error && <div className="bg-red-500/20 text-red-400 p-2 rounded mb-4">{error}</div>}
+    <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: '#111' }}>
+      <div style={{ backgroundColor: 'rgba(0,0,0,0.6)', padding: '2rem', borderRadius: '1rem', width: '100%', maxWidth: '400px' }}>
+        <h2 style={{ textAlign: 'center', marginBottom: '1rem' }}>ScamShield AI</h2>
+        <h3 style={{ textAlign: 'center', marginBottom: '1rem' }}>Login</h3>
+        {error && <div style={{ color: 'red', marginBottom: '1rem' }}>{error}</div>}
         <form onSubmit={handleSubmit}>
           <input
             type="text"
             placeholder="Username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
-            className="w-full p-3 mb-4 rounded-lg bg-white/5 border border-white/20 focus:border-cyan-400 outline-none"
+            style={{ width: '100%', padding: '0.5rem', marginBottom: '1rem' }}
             required
           />
           <input
@@ -53,20 +51,16 @@ const Login = ({ onSwitchToRegister }) => {
             placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="w-full p-3 mb-6 rounded-lg bg-white/5 border border-white/20 focus:border-cyan-400 outline-none"
+            style={{ width: '100%', padding: '0.5rem', marginBottom: '1rem' }}
             required
           />
-          <button
-            type="submit"
-            disabled={loading}
-            className="w-full py-3 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 transition font-semibold"
-          >
+          <button type="submit" disabled={loading} style={{ width: '100%', padding: '0.5rem' }}>
             {loading ? 'Logging in...' : 'Login'}
           </button>
         </form>
-        <p className="text-center mt-4 text-gray-400">
+        <p style={{ textAlign: 'center', marginTop: '1rem' }}>
           Don't have an account?{' '}
-          <button onClick={onSwitchToRegister} className="text-cyan-400 hover:underline">
+          <button onClick={onSwitchToRegister} style={{ background: 'none', border: 'none', color: 'cyan', cursor: 'pointer' }}>
             Register
           </button>
         </p>
