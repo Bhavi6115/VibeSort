@@ -2,3 +2,6 @@ flask
 flask-cors
 openai
 python-dotenv
+ai
+numpy
+urlparse
