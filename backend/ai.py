@@ -1,5 +1,5 @@
 import re
-import numpy as np
+import numpy as numpy
 from urllib.parse import urlparse
 
 # ---------------- URL Feature Extractor ---------------- #
