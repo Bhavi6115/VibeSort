@@ -4,4 +4,3 @@ openai
 python-dotenv
 ai
 numpy
-urlparse
