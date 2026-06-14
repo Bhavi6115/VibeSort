@@ -14,7 +14,6 @@ The frontend features a 3D animated dashboard, step‑by‑step analysis, histor
 - **Step‑by‑Step Scanner** – Real‑time visual progress during analysis  
 - **Persistent History** – Each user’s scans are saved and viewable in a clickable list  
 - **Alerts System** – Configurable risk threshold and sensitivity (Low/Medium/High)  
-- **User Authentication** – JWT‑based login/register with SQLite (password hashed with bcrypt)  
 - **3D Background** – Animated dodecahedron and floating particles powered by `@react-three/fiber`  
 
 ---
@@ -23,11 +22,9 @@ The frontend features a 3D animated dashboard, step‑by‑step analysis, histor
 
 ### Backend
 - Flask (Python)
-- Flask‑JWT‑Extended
-- Flask‑CORS
 - SQLite
 - scikit‑learn (Random Forest)
-- bcrypt
+
 
 ### Frontend
 - React (Create React App)
