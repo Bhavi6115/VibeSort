@@ -112,6 +112,6 @@ Push to main – Render auto‑deploys.
 Team name: solo sort
 Name: Bhavika Vasule
 
-🔗 Live Demo
+🔗 Live Demo: https://vibesort-2.onrender.com/
 👉 Try ScamShield AI now – paste a suspicious message and see the AI in action.
 
