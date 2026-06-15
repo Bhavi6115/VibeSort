@@ -48,6 +48,9 @@ function FloatingParticles() {
 }
 
 // ================= APP =================
+// ✅ Backend URL – your live Render backend
+const API_BASE = 'https://vibesort.onrender.com';
+
 export default function App() {
   const [tab, setTab] = useState("dashboard");
   const [message, setMessage] = useState("");
@@ -105,22 +108,21 @@ export default function App() {
           return prev;
         }
       });
-    }, 1200);  // slower: 1200ms
+    }, 1200);
 
     try {
-      const res = await fetch("http://127.0.0.1:5000/analyze", {
+      // ✅ Using your live backend URL
+      const res = await fetch(`${API_BASE}/analyze`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ message })
       });
       const data = await res.json();
 
-      // Mark all steps as completed
       setSteps(analysisSteps.map(s => ({ ...s, completed: true })));
       clearInterval(stepInterval);
       setCurrentStep(analysisSteps.length);
 
-      // Small delay to show final step
       setTimeout(() => {
         setResult(data);
         setLoading(false);
@@ -132,7 +134,6 @@ export default function App() {
         safe: prev.safe + (data.classification === "Safe" ? 1 : 0)
       }));
 
-      // Check if this should trigger a new alert
       if (data.risk_score >= riskThreshold && alertSensitivity === "high") {
         setAlerts(prev => [{
           id: Date.now(),
@@ -152,7 +153,8 @@ export default function App() {
 
   const fetchHistory = async () => {
     try {
-      const res = await fetch("http://127.0.0.1:5000/history");
+      // ✅ Using your live backend URL
+      const res = await fetch(`${API_BASE}/history`);
       const data = await res.json();
       setHistory(data);
     } catch (err) {
@@ -256,7 +258,7 @@ export default function App() {
 
       {/* Main Content */}
       <div className="ml-64 p-8 space-y-8 relative z-0">
-        {/* Dashboard Tab (unchanged) */}
+        {/* Dashboard Tab */}
         {tab === "dashboard" && (
           <>
             <div className="flex justify-between items-center">
@@ -324,7 +326,7 @@ export default function App() {
           </>
         )}
 
-        {/* Scanner Tab with Step‑by‑Step (slower) */}
+        {/* Scanner Tab */}
         {tab === "scanner" && (
           <div className="max-w-2xl mx-auto space-y-6">
             <h2 className="text-3xl font-bold text-center bg-gradient-to-r from-cyan-300 to-blue-400 bg-clip-text text-transparent">
@@ -345,7 +347,6 @@ export default function App() {
               {loading ? "Analyzing..." : "Analyze Message"}
             </button>
 
-            {/* Step‑by‑Step Progress */}
             {loading && steps.length > 0 && (
               <div className="bg-black/40 backdrop-blur-sm p-6 rounded-2xl border border-white/10 space-y-4">
                 {steps.map((step, idx) => (
@@ -363,7 +364,6 @@ export default function App() {
               </div>
             )}
 
-            {/* Result Card */}
             {result && (
               <div className="mt-6 p-6 rounded-2xl bg-black/40 backdrop-blur-sm border border-white/10 space-y-4 animate-fadeIn">
                 <div className="flex justify-between items-center">
@@ -401,7 +401,7 @@ export default function App() {
           </div>
         )}
 
-        {/* History Tab with clickable entries */}
+        {/* History Tab */}
         {tab === "history" && (
           <>
             <h2 className="text-3xl font-bold bg-gradient-to-r from-cyan-300 to-blue-400 bg-clip-text text-transparent">
@@ -434,7 +434,7 @@ export default function App() {
           </>
         )}
 
-        {/* Analytics Tab (unchanged) */}
+        {/* Analytics Tab */}
         {tab === "analytics" && (
           <div className="space-y-6">
             <h2 className="text-3xl font-bold bg-gradient-to-r from-cyan-300 to-blue-400 bg-clip-text text-transparent">
@@ -486,7 +486,7 @@ export default function App() {
           </div>
         )}
 
-        {/* Alerts Tab with enhanced controls */}
+        {/* Alerts Tab */}
         {tab === "alerts" && (
           <div className="space-y-6">
             <div className="flex justify-between items-center">
@@ -560,7 +560,7 @@ export default function App() {
           </div>
         )}
 
-        {/* Settings Tab with enhanced options */}
+        {/* Settings Tab */}
         {tab === "settings" && (
           <div className="max-w-md mx-auto space-y-6">
             <h2 className="text-3xl font-bold bg-gradient-to-r from-cyan-300 to-blue-400 bg-clip-text text-transparent">

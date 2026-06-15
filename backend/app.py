@@ -6,12 +6,11 @@ from dotenv import load_dotenv
 load_dotenv()
 
 app = Flask(__name__)
-CORS(app)
-from flask_cors import CORS
+
+# ✅ Correct CORS – allow only your frontend (no trailing slash)
 CORS(app, origins=['https://vibesort-2.onrender.com'])
 
 detector = ScamDetector()
-
 history = []
 
 
@@ -27,16 +26,12 @@ def analyze():
     data = request.get_json()
 
     if not data:
-        return jsonify({
-            "error": "No data received"
-        }), 400
+        return jsonify({"error": "No data received"}), 400
 
     message = data.get("message", "").strip()
 
     if not message:
-        return jsonify({
-            "error": "No message provided"
-        }), 400
+        return jsonify({"error": "No message provided"}), 400
 
     try:
         result = detector.analyze(message)
@@ -52,9 +47,7 @@ def analyze():
         return jsonify(result)
 
     except Exception as e:
-        return jsonify({
-            "error": str(e)
-        }), 500
+        return jsonify({"error": str(e)}), 500
 
 
 @app.route("/history", methods=["GET"])
@@ -65,15 +58,12 @@ def get_history():
 @app.route("/clear-history", methods=["POST"])
 def clear_history():
     history.clear()
-
-    return jsonify({
-        "message": "History cleared successfully"
-    })
+    return jsonify({"message": "History cleared successfully"})
 
 
 if __name__ == "__main__":
     app.run(
         host="0.0.0.0",
         port=5000,
-        debug=True
+        debug=False   # ✅ Turn off debug mode for production on Render
     )
